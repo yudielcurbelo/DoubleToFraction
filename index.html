@@ -4,8 +4,25 @@
       <script src="fractions.js"></script>
   </head>
   <body>
+<h1> Double to Fractions </h1>
+<p> Please input a decimal input to convert to a fraction to 1 / 16" of an inch precision </p>
     <script>
-      alert(getFraction(58.24));
+        function retrieve() {
+          var doubleinput = document.getElementById("fraction_input").value;
+          var result = getFraction(doubleinput);
+          document.getElementById("Fraction_output").innerHTML = result;
+          console.log(result);
+                      }
     </script>
+
+    <form name="double_to_fraction" method="get" action="getFraction(doubleinput)" id="double_to_fraction">
+      <input type="text" id="fraction_input"></input>
+      <input type="button" onclick="retrieve()" value="Convert">
+    </form>
+
+    <br/>
+<div id="Fraction_output"></div>
+
+
   </body>
 </html>
