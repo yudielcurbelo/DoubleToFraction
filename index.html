@@ -7,36 +7,60 @@
             body {text-align: center; font-family: Arial}
             h1 {font-size: 3.5em;}
             p {font-size:1.2em}
-            #btnCalc {border-radius:4px; color: white; background-color:#339933; padding: 10px 20px 10px 20px; font-size: 20px;;}
+            #btnCalc {border-radius:8px; color: #FFFFFF; background-color:#4CAF50; padding: 10px 20px 10px 20px; font-size: 20px;;}
+            #btnReset  {border-radius:8px; color: gray; background-color:yellow; padding: 14px 20px 10px 20px; font-size: 16px;;}
             #fraction_input  {width: 150px; font-size: 1em; border-radius: 3px; padding: 10px;}
-            #Fraction_output {font-family: Arial; font-size: 6em; margin-top: 30px;}
+            #Fraction_output {font-family: Arial; font-size: 6em; margin-top: 30px; margin-bottom: 50px}
+            #details {font-size:.8em}
         </style>
 
   </head>
 <body>
-      <h1> Double to Fraction </h1>
-      <p> Please input a decimal input to convert to a fractional number. </br> Precision: 1/16" </br>Tolerance: 1/32".</p>
+      <h1> <strong>Double</strong> to <i>Fraction</i> </h1>
+      <p> Please input a decimal number to convert to a fractional number. </br> <strong id="details"> Precision: 1/16" </br>Tolerance: 1/32".</strong></p>
 
-                <script>
-                window.onload = function() {
-                  document.getElementById("fraction_input").focus();
-                };
-
-                    function retrieve() {
-                      var doubleinput = document.getElementById("fraction_input").value;
-                      var result = getFraction(doubleinput);
-                      document.getElementById("Fraction_output").innerHTML = result;
-                      console.log(result);
-                                  }
-                </script>
-
-        <form id="double_to_fraction" novalidate>
-            <input type="number" id="fraction_input" onchange="retrieve()"></input>
-            <input type="button" id="btnCalc" onclick="retrieve()" value="Calculate">
+        <form id="double_to_fraction" onSubmit="return false;" novalidate="">
+            <input type="number" step=".0625" id="fraction_input" value="0" onkeydown="convertFunction()"></input>
+            <input type="button" id="btnCalc" onclick="addToList()" value="Add to List"></input>
+            <input type="button" id="btnReset" onclick="resetValues()" value="Reset"></input>
         </form>
 
       <div id="Fraction_output"></div>
+      <div id="ResultTable"></div>
 
+                      <script>
+
+                      window.onload = function() {
+                        document.onkeydown = function (evt) {
+                            evt = evt || window.event;
+                            if (evt.keyCode == 27) {   //on ESC keydown reset all values
+                                resetValues();
+                                }
+                            if (evt.keyCode == 13) {  //on Enter keydown call convertFunction() function
+                                convertFunction();
+                                }
+                        };
+                        document.getElementById("fraction_input").select().focus();    //select item and assign focus to field
+                                                };
+                          var result;
+                          function convertFunction() {
+                            var doubleinput = document.getElementById("fraction_input").value;
+                            result = getFraction(doubleinput);
+                            document.getElementById("Fraction_output").innerHTML = result;
+                            console.log(result);
+                            return result;
+                          }
+                          function addToList() {
+                            document.getElementById("ResultTable").innerHTML += result + "</br>";
+                          }
+
+                          function resetValues() {
+                            document.getElementById("fraction_input").value = "";
+                            document.getElementById("ResultTable").innerHTML = "";
+                            document.getElementById("Fraction_output").innerHTML = "";
+                            document.getElementById("fraction_input").focus();
+                                        }
+                      </script>
 
   </body>
 </html>
