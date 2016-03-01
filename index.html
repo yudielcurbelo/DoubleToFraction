@@ -20,7 +20,7 @@
       <p> Please input a decimal number to convert to a fractional number. </br> <strong id="details"> Precision: 1/16" </br>Tolerance: 1/32".</strong></p>
 
         <form id="double_to_fraction" onSubmit="return false;" novalidate="">
-            <input type="number" step=".0625" id="fraction_input" value="0" onkeydown="convertFunction()"></input>
+            <input type="number" step=".0625" id="fraction_input" value="0" onkeyup="convertFunction()"></input>
             <input type="button" id="btnCalc" onclick="addToList()" value="Add to List"></input>
             <input type="button" id="btnReset" onclick="resetValues()" value="Reset"></input>
         </form>
@@ -31,7 +31,7 @@
                       <script>
 
                       window.onload = function() {
-                        document.onkeydown = function (evt) {
+                        document.onkeyup = function (evt) {
                             evt = evt || window.event;
                             if (evt.keyCode == 27) {   //on ESC keydown reset all values
                                 resetValues();
